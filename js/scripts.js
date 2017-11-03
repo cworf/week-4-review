@@ -8,7 +8,7 @@ var basePriceSet = {
   "small": 9,
   "medium": 11,
   "large": 13,
-  "extraLarge" : 15,
+  "extraLarge": 15,
 };
 var cheesePriceSet = {
   "noCheese": 0,
@@ -23,7 +23,6 @@ PizzaBuild.prototype.price = function(){
   var meatPrice = this.meat.length * 2.5;
 
   return basePrice + cheesePrice + vegiesPrice + meatPrice;
-
 }
 
 
@@ -37,6 +36,8 @@ $(function(){
     var selectedCheese = $('input[name=cheese]:checked').val();
     var selectedVegies = [];
     var selectedMeat = [];
+    var thisPizza = new PizzaBuild(selectedSize, selectedCheese, selectedVegies, selectedMeat);
+    var thisPrice = thisPizza.price()
 
     $('input[name=vegies]:checked').each(function(){
       selectedVegies.push($(this).val());
@@ -45,8 +46,7 @@ $(function(){
       selectedMeat.push($(this).val());
     });
 
-    var thisPizza = new PizzaBuild(selectedSize, selectedCheese, selectedVegies, selectedMeat);
-    var thisPrice = thisPizza.price()
+    console.log(thisPizza);
     console.log(thisPrice);
   });
 });
