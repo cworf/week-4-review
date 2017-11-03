@@ -1,4 +1,4 @@
-function PizzaBuild (size, cheese, vegies, meats){
+function Pizza (size, cheese, vegies, meats){
   this.size = size;
   this.cheese = cheese;
   this.vegies = vegies;
@@ -8,17 +8,21 @@ function PizzaBuild (size, cheese, vegies, meats){
   this.meatsImgs = getImages(meats);
 }
 
-function getImages(toppings){
-  if (Array.isArray(toppings)) {
-    var imgs = toppings.map(function(topping){
-      return topping + ".png";
-    });
-    return imgs;
-  } else if (toppings && toppings !== "noCheese") {
-    return toppings + ".png";
-  }
+Pizza.prototype.price = function(){
+  var basePrice = basePriceSet[this.size],
+      cheesePrice = cheesePriceSet[this.cheese],
+      vegiesPrice = this.vegies.length,
+      meatPrice = this.meats.length * 2.5;
 
+  return basePrice + cheesePrice + vegiesPrice + meatPrice;
 }
+
+Pizza.prototype.CartItem = function(){
+  var newItem = `
+
+  `
+}
+
 var basePriceSet = {
   "small": 9,
   "medium": 11,
@@ -31,20 +35,17 @@ var cheesePriceSet = {
   "xCheese": 3,
 };
 
-PizzaBuild.prototype.price = function(){
-  var basePrice = basePriceSet[this.size],
-      cheesePrice = cheesePriceSet[this.cheese],
-      vegiesPrice = this.vegies.length,
-      meatPrice = this.meats.length * 2.5;
+function getImages(toppings){
+  if (Array.isArray(toppings)) {
+    var imgs = toppings.map(function(topping){
+      return "<img src ='img/" + topping + ".png'>";
+    });
+    return imgs;
+  } else if (toppings && toppings !== "noCheese") {
+    return "<img src ='img/cheese.png'>";
+  }
 
-  return basePrice + cheesePrice + vegiesPrice + meatPrice;
 }
-
-PizzaBuild.prototype.addToCart = function(){
-
-}
-
-
 
 $(function(){
   $('#pizza-builder').submit(function(event){
@@ -60,7 +61,7 @@ $(function(){
     $('input[name=meats]:checked').each(function(){
       selectedMeats.push($(this).val());
     });
-    var thisPizza = new PizzaBuild(selectedSize, selectedCheese, selectedVegies, selectedMeats);
+    var thisPizza = new Pizza(selectedSize, selectedCheese, selectedVegies, selectedMeats);
     var thisPrice = thisPizza.price();
     console.log(thisPizza);
   });
