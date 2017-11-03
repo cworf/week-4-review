@@ -3,24 +3,21 @@ function PizzaBuild (size, cheese, vegies, meats){
   this.cheese = cheese;
   this.vegies = vegies;
   this.meats = meats;
-  this.cheeseImg = getCheese(cheese);
-  this.vegiesImgs = getImages(this.vegies);
+  this.cheeseImg = getImages(cheese);
+  this.vegiesImgs = getImages(vegies);
   this.meatsImgs = getImages(meats);
 }
 
-function getCheese(cheese){
-  if (cheese && cheese !== "noCheese") {
-    return cheese + ".png";
-  }
-}
 function getImages(toppings){
-  console.log(toppings);
-  var imgArr = [];
-  toppings.forEach(function(topping){
-    imgArr.push(topping + ".png");
-    console.log(topping);
-  });
-  return imgArr;
+  if (Array.isArray(toppings)) {
+    var imgs = toppings.map(function(topping){
+      return topping + ".png";
+    });
+    return imgs;
+  } else if (toppings && toppings !== "noCheese") {
+    return toppings + ".png";
+  }
+
 }
 var basePriceSet = {
   "small": 9,
@@ -56,8 +53,6 @@ $(function(){
     var selectedCheese = $('input[name=cheese]:checked').val();
     var selectedVegies = [];
     var selectedMeats = [];
-    var thisPizza = new PizzaBuild(selectedSize, selectedCheese, selectedVegies, selectedMeats);
-    var thisPrice = thisPizza.price()
 
     $('input[name=vegies]:checked').each(function(){
       selectedVegies.push($(this).val());
@@ -65,6 +60,8 @@ $(function(){
     $('input[name=meats]:checked').each(function(){
       selectedMeats.push($(this).val());
     });
+    var thisPizza = new PizzaBuild(selectedSize, selectedCheese, selectedVegies, selectedMeats);
+    var thisPrice = thisPizza.price();
     console.log(thisPizza);
   });
 });
