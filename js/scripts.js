@@ -18,9 +18,15 @@ Pizza.prototype.price = function(){
 }
 
 Pizza.prototype.CartItem = function(){
-  var newItem = `
-
-  `
+  return `
+  <div class='card'>
+    <div class='pizza-header'>
+      <img src='img/crust.png'>
+      <div class='topping-group' id='cheese-img'>`+ this.cheeseImg + `</div>
+      <div class='topping-group' id='cheese-img'>`+ this.meatsImgs.join("") + `</div>
+      <div class='topping-group' id='cheese-img'>`+ this.vegiesImgs.join("") + `</div>
+    </div>
+  </div>`
 }
 
 var basePriceSet = {
