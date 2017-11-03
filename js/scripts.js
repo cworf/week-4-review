@@ -3,18 +3,28 @@ function PizzaBuild (size, cheese, vegies, meat){
   this.cheese = cheese;
   this.vegies = vegies;
   this.meat = meat;
+}
+var basePriceSet = {
+  "small": 9,
+  "medium": 11,
+  "large": 13,
+  "extraLarge" : 15,
 };
-var basePrice = {
-  small: 9,
-  medium: 11,
-  large: 13,
-  extraLarge : 15,
+var cheesePriceSet = {
+  "noCheese": 0,
+  "regCheese": 2,
+  "xCheese": 3,
 };
-var cheesePrice = {
-  noCheese: 0,
-  regCheese: 2,
-  xCheese: 3,
-};
+
+PizzaBuild.prototype.price = function(){
+  var basePrice = basePriceSet[this.size];
+  var cheesePrice = cheesePriceSet[this.cheese];
+  var vegiesPrice = this.vegies.length;
+  var meatPrice = this.meat.length * 2.5;
+
+  return basePrice + cheesePrice + vegiesPrice + meatPrice;
+
+}
 
 
 
@@ -36,6 +46,7 @@ $(function(){
     });
 
     var thisPizza = new PizzaBuild(selectedSize, selectedCheese, selectedVegies, selectedMeat);
-    console.log(thisPizza);
+    var thisPrice = thisPizza.price()
+    console.log(thisPrice);
   });
 });
