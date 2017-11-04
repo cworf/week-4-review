@@ -1,5 +1,7 @@
 var cartTotal = 0;
 var cartNumber = 0;
+var cartObjects = [];
+
 function Pizza (size, cheese, veggies, meats){
   this.size = size;
   this.cheese = cheese;
@@ -8,6 +10,7 @@ function Pizza (size, cheese, veggies, meats){
   this.cheeseImg = getImages(cheese);
   this.veggiesImgs = getImages(veggies);
   this.meatsImgs = getImages(meats);
+  this.pizzaPrice = this.price();
 }
 
 Pizza.prototype.price = function(){
@@ -24,13 +27,16 @@ Pizza.prototype.cartItem = function(){
   cartNumber++;
   return `
   <div class='cart-item'>
+    <button type="button" class="close" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
     <div class='pizza-header'>
       <img src='img/crust.png'>` + this.cheeseImg +
       this.meatsImgs.join("") +
       this.veggiesImgs.join("") + `
     </div>
     <div class="pizza-price">
-      $` + this.price() + `
+      $<span class="item-price">` + this.price() + `</span>
     </div>
     <div class="pizza-info">
       <div id="accordion" role="tablist">
@@ -97,7 +103,7 @@ var cheesePriceSet = {
   "regCheese": 2,
   "xCheese": 3,
 };
-var cartObjects = [];
+
 
 function getImages(toppings){
   if (Array.isArray(toppings)) {
@@ -110,7 +116,6 @@ function getImages(toppings){
   } else {
     return "";
   }
-
 }
 
 $(function(){
@@ -133,11 +138,28 @@ $(function(){
     $('#cheese-img').html(thisPizza.cheeseImg);
     $('#veggie-img').html(thisPizza.veggiesImgs);
     $('#meat-img').html(thisPizza.meatsImgs);
-
   });
 
   $('#pizza-builder').submit(function(event){
     event.preventDefault();
-    $('#cart-items').append(thisPizza.cartItem());
+    cartObjects.push(thisPizza);
+    cartTotal = 0;
+    refreshCart();
+    $('.close').click(function(){
+      console.log(cartTotal);
+      var removePrice = $(this).next('.pizza-price').children('.item-price').text();
+      console.log(removePrice);
+      cartTotal -= removePrice;
+      $(this).parent().hide();
+      console.log(cartTotal);
+    });
   });
+
+  function refreshCart(){
+    $('#cart-items').text("");
+    for (var i = 0; i < cartObjects.length; i++) {
+      $('#cart-items').append(cartObjects[i].cartItem());
+      cartTotal =+ cartObjects[i].price();
+    }
+  }
 });
