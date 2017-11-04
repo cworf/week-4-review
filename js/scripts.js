@@ -97,6 +97,7 @@ var cheesePriceSet = {
   "regCheese": 2,
   "xCheese": 3,
 };
+var cartObjects = [];
 
 function getImages(toppings){
   if (Array.isArray(toppings)) {
@@ -114,6 +115,7 @@ function getImages(toppings){
 
 $(function(){
   var thisPizza;
+  var thisPrice;
   $('#pizza-builder').change(function(){
     var selectedSize = $('input[name=size]:checked').val();
     var selectedCheese = $('input[name=cheese]:checked').val();
@@ -127,9 +129,13 @@ $(function(){
       selectedMeats.push($(this).val());
     });
     thisPizza = new Pizza(selectedSize, selectedCheese, selectedVeggies, selectedMeats);
-    var thisPrice = thisPizza.price();
-    console.log(thisPizza);
+    thisPrice = thisPizza.price();
+    $('#cheese-img').html(thisPizza.cheeseImg);
+    $('#veggie-img').html(thisPizza.veggiesImgs);
+    $('#meat-img').html(thisPizza.meatsImgs);
+
   });
+
   $('#pizza-builder').submit(function(event){
     event.preventDefault();
     $('#cart-items').append(thisPizza.cartItem());
