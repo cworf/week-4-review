@@ -1,5 +1,5 @@
 var cartTotal = 0;
-var cartNumber = 0;
+var numberOfItems = 0;
 var cartObjects = [];
 
 function Pizza (size, cheese, veggies, meats){
@@ -23,8 +23,6 @@ Pizza.prototype.price = function(){
 }
 
 Pizza.prototype.cartItem = function(){
-  cartTotal += this.price();
-  cartNumber++;
   return `
   <div class='cart-item'>
     <button type="button" class="close" aria-label="Close">
@@ -36,7 +34,7 @@ Pizza.prototype.cartItem = function(){
       this.veggiesImgs.join("") + `
     </div>
     <div class="pizza-price">
-      $<span class="item-price">` + this.price() + `</span>
+      $<span class="item-price">` + this.pizzaPrice + `</span>
     </div>
     <div class="pizza-info">
       <div id="accordion" role="tablist">
@@ -120,7 +118,6 @@ function getImages(toppings){
 
 $(function(){
   var thisPizza;
-  var thisPrice;
   $('#pizza-builder').change(function(){
     var selectedSize = $('input[name=size]:checked').val();
     var selectedCheese = $('input[name=cheese]:checked').val();
@@ -134,7 +131,6 @@ $(function(){
       selectedMeats.push($(this).val());
     });
     thisPizza = new Pizza(selectedSize, selectedCheese, selectedVeggies, selectedMeats);
-    thisPrice = thisPizza.price();
     $('#cheese-img').html(thisPizza.cheeseImg);
     $('#veggie-img').html(thisPizza.veggiesImgs);
     $('#meat-img').html(thisPizza.meatsImgs);
@@ -143,23 +139,29 @@ $(function(){
   $('#pizza-builder').submit(function(event){
     event.preventDefault();
     cartObjects.push(thisPizza);
-    cartTotal = 0;
     refreshCart();
     $('.close').click(function(){
-      console.log(cartTotal);
-      var removePrice = $(this).next('.pizza-price').children('.item-price').text();
-      console.log(removePrice);
-      cartTotal -= removePrice;
-      $(this).parent().hide();
-      console.log(cartTotal);
+      var closeThis = $(this).parent().attr('id')
+      console.log(closeThis);
+      cartObjects.splice(closeThis, 1);
+      refreshCart();
     });
   });
 
   function refreshCart(){
     $('#cart-items').text("");
+    cartTotal = 0;
     for (var i = 0; i < cartObjects.length; i++) {
       $('#cart-items').append(cartObjects[i].cartItem());
-      cartTotal =+ cartObjects[i].price();
+      $('.cart-item').last().attr('id', i);
+      cartTotal += cartObjects[i].pizzaPrice;
     }
+    $('.close').click(function(){
+      var closeThis = $(this).parent().attr('id')
+      console.log(closeThis);
+      cartObjects.splice(closeThis, 1);
+      refreshCart();
+    });
+    console.log(cartObjects);
   }
 });
