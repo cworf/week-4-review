@@ -3,6 +3,7 @@ var numberOfItems = 0;
 var cartObjects = [];
 
 function Pizza (size, cheese, veggies, meats){
+  this.id = 0;
   this.size = size;
   this.cheese = cheese;
   this.veggies = veggies;
@@ -37,31 +38,31 @@ Pizza.prototype.cartItem = function(){
       $<span class="item-price">` + this.pizzaPrice + `</span>
     </div>
     <div class="pizza-info">
-      <div id="accordion" role="tablist">
+      <div id="accordion` + this.id + `" role="tablist">
         <div class="card">
-          <div class="card-header" role="tab" id="cheeseHeading">
+          <div class="card-header" role="tab" id="cheeseHeading` + this.id + `">
             <h5 class="mb-0">
-              <a data-toggle="collapse" href="#collapseCheese">
+              <a data-toggle="collapse" href="#collapseCheese` + this.id + `">
                 Cheese Selection
               </a>
             </h5>
           </div>
 
-          <div id="collapseCheese" class="collapse show" role="tabpanel" data-parent="#accordion">
+          <div id="collapseCheese` + this.id + `" class="collapse show" role="tabpanel" data-parent="#accordion` + this.id + `">
             <div class="card-body">
               ` + this.cheese + `
             </div>
           </div>
         </div>
         <div class="card">
-          <div class="card-header" role="tab" id="meatHeading">
+          <div class="card-header" role="tab" id="meatHeading` + this.id + `">
             <h5 class="mb-0">
-              <a class="collapsed" data-toggle="collapse" href="#collapseMeat">
+              <a class="collapsed" data-toggle="collapse" href="#collapseMeat` + this.id + `">
                 Meat Selections
               </a>
             </h5>
           </div>
-          <div id="collapseMeat" class="collapse" role="tabpanel" data-parent="#accordion">
+          <div id="collapseMeat` + this.id + `" class="collapse" role="tabpanel" data-parent="#accordion` + this.id + `">
             <div class="card-body">
               <ul>
                 <li>` + this.meats.join("</li><li>") + `</li>
@@ -70,14 +71,14 @@ Pizza.prototype.cartItem = function(){
           </div>
         </div>
         <div class="card">
-          <div class="card-header" role="tab" id="veggieHeading">
+          <div class="card-header" role="tab" id="veggieHeading` + this.id + `">
             <h5 class="mb-0">
-              <a class="collapsed" data-toggle="collapse" href="#collapseVeggie">
+              <a class="collapsed" data-toggle="collapse" href="#collapseVeggie` + this.id + `">
                 Veggie Selections
               </a>
             </h5>
           </div>
-          <div id="collapseVeggie" class="collapse" role="tabpanel" data-parent="#accordion">
+          <div id="collapseVeggie` + this.id + `" class="collapse" role="tabpanel" data-parent="#accordion` + this.id + `">
             <div class="card-body">
               <ul>
                 <li>` + this.veggies.join("</li><li>") + `</li>
@@ -142,12 +143,6 @@ $(function(){
       event.preventDefault();
       cartObjects.push(thisPizza);
       refreshCart();
-      $('.close').click(function(){
-        var closeThis = $(this).parent().attr('id')
-        console.log(closeThis);
-        cartObjects.splice(closeThis, 1);
-        refreshCart();
-      });
     } else {
       alert("you must select a size")
     }
@@ -162,6 +157,7 @@ $(function(){
       $('.cart-item').last().attr('id', i);
       cartTotal += cartObjects[i].pizzaPrice;
       numberOfItems++;
+      cartObjects[i].id = i;
     }
     $('#cart-total').text(cartTotal);
     $('#num-items').text(numberOfItems);
