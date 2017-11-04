@@ -118,6 +118,7 @@ function getImages(toppings){
 
 $(function(){
   var thisPizza;
+  $('#cheese-img').html("<img src ='img/cheese.png'>");
   $('#pizza-builder').change(function(){
     var selectedSize = $('input[name=size]:checked').val();
     var selectedCheese = $('input[name=cheese]:checked').val();
@@ -137,28 +138,35 @@ $(function(){
   });
 
   $('#pizza-builder').submit(function(event){
-    event.preventDefault();
-    cartObjects.push(thisPizza);
-    refreshCart();
-    $('.close').click(function(){
-      var closeThis = $(this).parent().attr('id')
-      console.log(closeThis);
-      cartObjects.splice(closeThis, 1);
+    if ($('input[name=size]:checked').val()) {
+      event.preventDefault();
+      cartObjects.push(thisPizza);
       refreshCart();
-    });
+      $('.close').click(function(){
+        var closeThis = $(this).parent().attr('id')
+        console.log(closeThis);
+        cartObjects.splice(closeThis, 1);
+        refreshCart();
+      });
+    } else {
+      alert("you must select a size")
+    }
   });
 
   function refreshCart(){
     $('#cart-items').text("");
     cartTotal = 0;
+    numberOfItems = 0;
     for (var i = 0; i < cartObjects.length; i++) {
       $('#cart-items').append(cartObjects[i].cartItem());
       $('.cart-item').last().attr('id', i);
       cartTotal += cartObjects[i].pizzaPrice;
+      numberOfItems++;
     }
+    $('#cart-total').text(cartTotal);
+    $('#num-items').text(numberOfItems);
     $('.close').click(function(){
-      var closeThis = $(this).parent().attr('id')
-      console.log(closeThis);
+      var closeThis = $(this).parent().attr('id');
       cartObjects.splice(closeThis, 1);
       refreshCart();
     });

@@ -23,7 +23,7 @@
           <form class="" id="pizza-builder">
             <div class="form-group size">
               <label for="small"><input id="small" type="radio" name="size" value="small">Small</label>
-              <label for="medium"><input id="medium" type="radio" name="size" value="medium" checked>Medium</label>
+              <label for="medium"><input id="medium" type="radio" name="size" value="medium">Medium</label>
               <label for="large"><input id="large" type="radio" name="size" value="large">Large</label>
               <label for="extra-large"><input id="extraLarge" type="radio" name="size" value="extraLarge">Extra Large</label>
             </div>
@@ -49,10 +49,15 @@
         </div>
       </div>
 
-      <div class="cart">
-        <div id="cart-items"></div>
-        <div class="cart-total">
-
+      <div class="cart row">
+        <div id="cart-items" class="col-md-10"></div>
+        <div class="total-box col-md-2">
+          <div class="number">
+            Number of Items: <span id="num-items"></span>
+          </div>
+          <div class="total">
+            Order Total: <span id="cart-total"></span>
+          </div>
         </div>
       </div>
     </div>
