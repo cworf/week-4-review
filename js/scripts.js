@@ -106,13 +106,15 @@ function getImages(toppings){
     return imgs;
   } else if (toppings && toppings !== "noCheese") {
     return "<img src ='img/cheese.png'>";
+  } else {
+    return "";
   }
 
 }
 
 $(function(){
+  var thisPizza;
   $('#pizza-builder').change(function(){
-    // event.preventDefault();
     var selectedSize = $('input[name=size]:checked').val();
     var selectedCheese = $('input[name=cheese]:checked').val();
     var selectedVeggies = [];
@@ -124,8 +126,12 @@ $(function(){
     $('input[name=meats]:checked').each(function(){
       selectedMeats.push($(this).val());
     });
-    var thisPizza = new Pizza(selectedSize, selectedCheese, selectedVeggies, selectedMeats);
+    thisPizza = new Pizza(selectedSize, selectedCheese, selectedVeggies, selectedMeats);
     var thisPrice = thisPizza.price();
     console.log(thisPizza);
+  });
+  $('#pizza-builder').submit(function(event){
+    event.preventDefault();
+    $('#cart-items').append(thisPizza.cartItem());
   });
 });
