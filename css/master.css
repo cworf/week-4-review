@@ -4,19 +4,26 @@ body {
     min-height: 100vh;
 }
 
-.cart {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
 #cart-items {
     display: flex;
+    flex-wrap: wrap;
 }
+
 .cart-item {
     max-width: 300px;
     position: relative;
     margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.card {
+    background: #b32211;
+    color: #fff;
+}
+
+a {
+    text-decoration: none!important;
+    color: #e8ca9e;
 }
 
 .cart-item img {
@@ -27,7 +34,13 @@ body {
     max-height: 100%;
     margin: auto;
 }
+.form-group {
+    padding: 50px 0;
+}
 
+.row {
+    margin-top: 50px;
+}
 .pizza-header {
     position: relative;
     height: 149px;
