@@ -7,10 +7,11 @@ body {
 #cart-items {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .cart-item {
-    max-width: 300px;
+    flex-basis: 31%;
     position: relative;
     margin-right: 10px;
     margin-bottom: 10px;
@@ -29,22 +30,25 @@ a {
 .cart-item img {
     position: absolute;
     top: 0;
+    bottom: 0;
     left: 0;
     right: 0;
     max-height: 100%;
     margin: auto;
 }
 .form-group {
-    padding: 50px 0;
+    display: flex;
 }
 
 .row {
     margin-top: 50px;
 }
+
 .pizza-header {
     position: relative;
     height: 149px;
     pointer-events: none;
+    margin: auto;
 }
 
 div#live-pizza img {
@@ -55,12 +59,126 @@ div#live-pizza img {
 }
 
 .visual {
-    display: flex;
+    /* display: flex; */
     justify-content: center;
 }
 
 #live-pizza {
     position: relative;
     width: 100%;
-    margin-top: 70px;
+    margin-top: -20px;
+    height: 560px;
+}
+
+input {
+    display: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.form-group.veggies, .meat {
+    flex-wrap: wrap;
+}
+
+.form-group.veggies label, .meat label {
+    flex-basis: 50%;
+    background: #b32211;
+}
+
+.veggies img, .meat img {
+    max-height: 90px;
+    width: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+}
+
+label:hover img, label:hover img, .checked img {
+    filter: grayscale(0%);
+}
+
+label:hover, .checked {
+    box-shadow: 0 0 3px 4px #00a1ff;z-index: 1;
+}
+
+.pizza-header.medium {
+    width: 44%;
+}
+
+.pizza-header.large {
+    width: 54%;
+}
+
+.pizza-header.small {
+    width: 33%;
+}
+
+.pizza-price {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 5px;
+    border-radius: 100%;
+    background: #ad2110;
+    border: 4px solid #e4d9ba;
+}
+
+.close {
+    color: #e15b4b;
+    text-shadow: 0 1px 0 #fff;
+    opacity: 1;
+}
+
+.close:before {
+    content: "Remove";
+    font-size: .5em;
+    position: absolute;
+    right: 1px;
+    text-shadow: none;
+    top: -7px;
+}
+
+.close:hover {
+    color: #fff;
+    opacity: 1;
+}
+
+.total-box {
+    position: fixed;
+    top: 52px;
+    left: -200px;
+    padding: 20px;
+    background: #ad2110;
+    color: #e8ca9e;
+    width: 200px;
+    transition: all .5s ease
+}
+
+.total-box > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.total-box:before {
+    content: "Cart";
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    padding: 5px 20px;
+    background: #ad2110;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+.total-box.show {
+    left: 20px;
 }

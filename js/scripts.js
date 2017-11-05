@@ -29,7 +29,7 @@ Pizza.prototype.cartItem = function(){
     <button type="button" class="close" aria-label="Close">
     <span aria-hidden="true">&times;</span>
     </button>
-    <div class='pizza-header'>
+    <div class='pizza-header ` + this.size + `'>
       <img src='img/crust.png'>` + this.cheeseImg +
       this.meatsImgs.join("") +
       this.veggiesImgs.join("") + `
@@ -48,7 +48,7 @@ Pizza.prototype.cartItem = function(){
             </h5>
           </div>
 
-          <div id="collapseCheese` + this.id + `" class="collapse show" role="tabpanel" data-parent="#accordion` + this.id + `">
+          <div id="collapseCheese` + this.id + `" class="collapse" role="tabpanel" data-parent="#accordion` + this.id + `">
             <div class="card-body">
               ` + this.cheese + `
             </div>
@@ -141,8 +141,13 @@ $(function(){
   $('#pizza-builder').submit(function(event){
     if ($('input[name=size]:checked').val()) {
       event.preventDefault();
+      if (cartObjects.length !== 0) {
+        var lastItem = cartObjects.slice(-1)[0];
+        thisPizza.id = lastItem.id + 1;
+      }
       cartObjects.push(thisPizza);
       refreshCart();
+      $('.total-box').addClass('show');
     } else {
       alert("you must select a size")
     }
@@ -168,4 +173,11 @@ $(function(){
     });
     console.log(cartObjects);
   }
+  $('input[type=checkbox]').click(function(){
+    $(this).parent().toggleClass('checked');
+  });
+  $('input[type=radio]').click(function(){
+    $(this).parent().addClass('checked');
+    $(this).parent().siblings().removeClass('checked');
+  });
 });

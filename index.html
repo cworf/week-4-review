@@ -21,31 +21,32 @@
             <div class="topping-group" id="meat-img"></div>
             <div class="topping-group" id="veggie-img"></div>
           </div>
+          <div id="cart-items"></div>
         </div>
         <div class="col-md-4">
           <form class="" id="pizza-builder">
             <div class="form-group size">
-              <label for="small"><input id="small" type="radio" name="size" value="small">Small</label>
-              <label for="medium"><input id="medium" type="radio" name="size" value="medium">Medium</label>
-              <label for="large"><input id="large" type="radio" name="size" value="large">Large</label>
-              <label for="extra-large"><input id="extraLarge" type="radio" name="size" value="extraLarge">Extra Large</label>
+              <label for="small"><input id="small" type="radio" name="size" value="small"><img src="img/small.png" alt="Small">Small</label>
+              <label for="medium"><input id="medium" type="radio" name="size" value="medium"><img src="img/medium.png" alt="Medium">Medium</label>
+              <label for="large"><input id="large" type="radio" name="size" value="large"><img src="img/large.png" alt="Large">Large</label>
+              <label for="extraLarge"><input id="extraLarge" type="radio" name="size" value="extraLarge"><img src="img/extra-large.png" alt="Extra Large">Extra Large</label>
             </div>
             <div class="form-group cheese">
-              <label for="noCheese"><input id="noCheese" type="radio" name="cheese" value="noCheese">No Cheese</label>
-              <label for="regCheese"><input id="regCheese" type="radio" name="cheese" value="regCheese" checked>Regular Cheese</label>
-              <label for="xCheese"><input id="xCheese" type="radio" name="cheese" value="xCheese">Extra Cheese</label>
+              <label for="noCheese"><input id="noCheese" type="radio" name="cheese" value="noCheese"><img src="img/crust.png" alt="No Cheese">No Cheese</label>
+              <label for="regCheese"><input id="regCheese" type="radio" name="cheese" value="regCheese" checked><img src="img/cheese.png" alt="Regular Cheese">Regular Cheese</label>
+              <label for="xCheese"><input id="xCheese" type="radio" name="cheese" value="xCheese"><img src="img/cheese.png" alt="Extra Cheese">Extra Cheese</label>
             </div>
             <div class="form-group veggies">
-              <label for="mushrooms"><input id="mushrooms" type="checkbox" name="veggies" value="mushrooms">Mushrooms</label>
-              <label for="onions"><input id="onions" type="checkbox" name="veggies" value="onions">Onions</label>
-              <label for="green-peppers"><input id="green-peppers" type="checkbox" name="veggies" value="green-peppers">Green Peppers</label>
-              <label for="black-olives"><input id="black-olives" type="checkbox" name="veggies" value="black-olives">Black Olives</label>
+              <label for="mushrooms"><input id="mushrooms" type="checkbox" name="veggies" value="mushrooms"><img src="img/mushrooms.jpg" alt="Mushrooms">Mushrooms</label>
+              <label for="onions"><input id="onions" type="checkbox" name="veggies" value="onions"><img src="img/onions.jpg" alt="Onions">Onions</label>
+              <label for="green-peppers"><input id="green-peppers" type="checkbox" name="veggies" value="green-peppers"><img src="img/green-peppers.jpg" alt="Green Peppers">Green Peppers</label>
+              <label for="black-olives"><input id="black-olives" type="checkbox" name="veggies" value="black-olives"><img src="img/olives.jpg" alt="Black Olives">Black Olives</label>
             </div>
             <div class="form-group meat">
-              <label for="sausage"><input id="sausage" type="checkbox" name="meats" value="sausage">Sausage</label>
-              <label for="pepperoni"><input id="pepperoni" type="checkbox" name="meats" value="pepperoni">Pepperoni</label>
-              <label for="ham"><input id="ham" type="checkbox" name="meats" value="ham">Ham</label>
-              <label for="chicken"><input id="chicken" type="checkbox" name="meats" value="chicken">Chicken</label>
+              <label for="sausage"><input id="sausage" type="checkbox" name="meats" value="sausage"><img src="img/sausage.jpg" alt="Sausage">Sausage</label>
+              <label for="pepperoni"><input id="pepperoni" type="checkbox" name="meats" value="pepperoni"><img src="img/pepperoni.jpg" alt="Pepperoni">Pepperoni</label>
+              <label for="ham"><input id="ham" type="checkbox" name="meats" value="ham"><img src="img/ham.jpg" alt="Ham">Ham</label>
+              <label for="chicken"><input id="chicken" type="checkbox" name="meats" value="chicken"><img src="img/chicken.jpg" alt="Chicken">Chicken</label>
             </div>
             <button type="submit" class="btn btn-primary">Add to Cart</button>
           </form>
@@ -53,13 +54,13 @@
       </div>
 
       <div class="cart row">
-        <div id="cart-items" class="col-md-10"></div>
-        <div class="total-box col-md-2">
+
+        <div class="total-box">
           <div class="number">
             Number of Items: <span id="num-items"></span>
           </div>
           <div class="total">
-            Order Total: <span id="cart-total"></span>
+            Order Total: $<span id="cart-total"></span>
           </div>
         </div>
       </div>
