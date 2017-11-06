@@ -58,11 +58,6 @@ div#live-pizza img {
     margin: auto;
 }
 
-.visual {
-    /* display: flex; */
-    justify-content: center;
-}
-
 #live-pizza {
     position: relative;
     width: 100%;
@@ -177,6 +172,10 @@ label:hover, .checked {
     background: #ad2110;
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
+}
+
+.card-header {
+    padding: 5px 10px;
 }
 
 .total-box.show {
