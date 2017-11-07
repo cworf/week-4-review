@@ -17,7 +17,7 @@ This javascript program allows a user to select ingredients for a pizza and add 
 
 ## Specifications
 
-
+(Tyler, im a little confused on this one with how to put the input output examples. if I could go over the specs again with you, one more refresher will probably be all I need to get the picture haha.)
 
 ## Technologies used
 

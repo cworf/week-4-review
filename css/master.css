@@ -41,7 +41,7 @@ a {
 }
 
 .row {
-    margin-top: 50px;
+    padding-top: 50px;
 }
 
 .pizza-header {
@@ -78,6 +78,7 @@ label {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    background: rgba(0, 0, 0, 0.48);
     cursor: pointer;
 }
 
@@ -174,10 +175,16 @@ label:hover, .checked {
     border-top-left-radius: 20px;
 }
 
+.total-box.show {
+    left: 20px;
+}
+
 .card-header {
     padding: 5px 10px;
 }
 
-.total-box.show {
-    left: 20px;
+.container {
+    box-shadow: 0 0 410px #00a1ff, inset 0 0 410px #00a1ff, 0 0 800px #fff;
+    border-left: 1px solid #e9cb98;
+    border-right: 1px solid #e9cb98;
 }
